@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gsap</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="head">
+        <h1>GSAP animation with scroll trigger and MotionPath Plugin</h1>
+    </section>
+    <section id="animation-trigger">
+        <svg id="visual" viewBox="0 0 960 540" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+            <path id="path" d="M0 357L10.7 358.7C21.3 360.3 42.7 363.7 64 351.8C85.3 340 106.7 313 128 322.7C149.3 332.3 170.7 378.7 192 397.8C213.3 417 234.7 409 256 395.5C277.3 382 298.7 363 320 343.3C341.3 323.7 362.7 303.3 384 306.3C405.3 309.3 426.7 335.7 448 353.3C469.3 371 490.7 380 512 371.8C533.3 363.7 554.7 338.3 576 339.8C597.3 341.3 618.7 369.7 640 386.5C661.3 403.3 682.7 408.7 704 411.2C725.3 413.7 746.7 413.3 768 391.3C789.3 369.3 810.7 325.7 832 311.7C853.3 297.7 874.7 313.3 896 329.8C917.3 346.3 938.7 363.7 949.3 372.3L960 381" fill="none" stroke-linecap="round" stroke-linejoin="miter" stroke="#0066FF" stroke-width="4"></path>
+            <g id="rect">
+                <circle cx="50" cy="50" r="40"  stroke-width="3" fill="dodgerblue" />
+              
+            </g>
+        </svg>
+    </section>
+    <footer>
+        Note: we can use motionPathPlugin only with premium subsscription.
+    </footer>
+    <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+    <script src="https://assets.codepen.io/16327/MotionPathHelper.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(MotionPathPlugin);
+
+        gsap.from("#rect", {
+            scrollTrigger: {
+                trigger: "#animation-trigger",
+                pin: true,
+                start: "top top",
+                end: "bottom end",
+                scrub: 1,
+                snap: {
+                    snapTo: "labels",
+                    duration: 5,
+                    delay: 0.5,
+                    ease: "power1.inOut"
+                }
+            },
+            motionPath: {
+                duration: 5,
+                path: "#path",
+                align: "#path",
+                autoRotate: true,
+                alignOrigin: [0.5, 0.5]
+            }
+        });
+    </script>
+</body>
+</html>
